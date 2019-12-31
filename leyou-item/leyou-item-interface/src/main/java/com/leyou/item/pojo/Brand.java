@@ -1,9 +1,7 @@
 package com.leyou.item.pojo;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Table(name = "tb_brand")
 public class Brand {
@@ -13,6 +11,17 @@ public class Brand {
     private String name;// 品牌名称
     private String image;// 品牌图片
     private Character letter;
+
+    @Transient
+    private List<Long> cids;
+
+    public List<Long> getCids() {
+        return cids;
+    }
+
+    public void setCids(List<Long> cids) {
+        this.cids = cids;
+    }
 
     public Long getId() {
         return id;

@@ -3,12 +3,11 @@ package com.leyou.item.controller;
 import com.leyou.item.pojo.Category;
 import com.leyou.item.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
@@ -46,4 +45,32 @@ public class CategoryController {
         // 500 服务器内部错误
 //        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
+
+    @PostMapping("add")
+    public ResponseEntity<Void> addCategory(Category category){
+
+        this.categoryService.saveCategory(category);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+    @PostMapping("edit")
+    public ResponseEntity<Void> editCategory(@RequestParam(value = "id") Long id, @RequestParam(value = "name") String name){
+        this.categoryService.editCategory(id, name);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @DeleteMapping("delete")
+    public ResponseEntity<Void> deleteCategory(@RequestParam(value = "id") Long id) {
+        this.categoryService.deleteCategory(id);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @GetMapping("bid/{bid}")
+    public ResponseEntity<List<Category>> queryByBrandId(@PathVariable("bid") Long bid){
+        List<Category> list = this.categoryService.queryByBrandId(bid);
+        if (list == null || list.size() < 1) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity.ok(list);
+    }
+
 }

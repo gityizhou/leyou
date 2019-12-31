@@ -23,4 +23,24 @@ public class CategoryService {
         record.setParentId(pid);
         return categoryMapper.select(record);
     }
+
+    public void saveCategory(Category category) {
+
+        categoryMapper.insertSelective(category);
+    }
+
+    public void editCategory(Long id, String name) {
+        Category category = new Category();
+        category.setId(id);
+        category.setName(name);
+        categoryMapper.updateByPrimaryKeySelective(category);
+    }
+
+    public void deleteCategory(Long id) {
+        categoryMapper.deleteByPrimaryKey(id);
+    }
+
+    public List<Category> queryByBrandId(Long bid) {
+        return this.categoryMapper.queryByBrandId(bid);
+    }
 }
