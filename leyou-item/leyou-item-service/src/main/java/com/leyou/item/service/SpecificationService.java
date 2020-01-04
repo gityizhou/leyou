@@ -34,4 +34,28 @@ public class SpecificationService {
         specParam.setGroupId(gid);
         return this.paramMapper.select(specParam);
     }
+
+    public void addGroup(SpecGroup group) {
+        groupMapper.insertSelective(group);
+    }
+
+    public void editGroup(SpecGroup group) {
+        groupMapper.updateByPrimaryKeySelective(group);
+    }
+
+    public void deleteGroup(Long id) {
+        groupMapper.deleteByPrimaryKey(id);
+    }
+
+    public void addParam(SpecParam specParam) {
+        paramMapper.insertSelective(specParam);
+    }
+
+    public void editParam(SpecParam specParam) {
+        paramMapper.updateByPrimaryKeySelective(specParam);
+    }
+
+    public void deleteParam(Long id) {
+        paramMapper.deleteByPrimaryKey(id);
+    }
 }
