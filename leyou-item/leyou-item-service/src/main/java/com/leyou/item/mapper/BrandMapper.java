@@ -16,4 +16,7 @@ public interface BrandMapper extends Mapper<Brand> {
 
     @Delete("delete from tb_category_brand where brand_id = #{bid};")
     void deleteCategoryAndBrand(@Param("bid") Long bid);
+
+    @Select("select * from tb_brand a inner join tb_category_brand b on a.id=b.brand_id where b.category_id=#{cid}")
+    List<Brand> selectBrandsByCid(Long cid);
 }

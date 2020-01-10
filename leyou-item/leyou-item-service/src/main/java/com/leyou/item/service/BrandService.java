@@ -80,4 +80,8 @@ public class BrandService {
         brandMapper.deleteByPrimaryKey(bid);
         brandMapper.deleteCategoryAndBrand(bid);
     }
+
+    public List<Brand> queryBrandsByCid(Long cid) {
+        return this.brandMapper.selectBrandsByCid(cid);
+    }
 }
